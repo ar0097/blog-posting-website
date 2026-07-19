@@ -30,6 +30,7 @@ export default function BlogDetail() {
   const [query, setQuery] = useState("");
 
   const [user, setUser] = useState<any>(null);
+  const [admin, setAdmin] = useState<any>(null);
 
   const { slug } = useParams();
 
@@ -37,9 +38,14 @@ export default function BlogDetail() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    const storedAdmin = localStorage.getItem("admin");
 
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+    }
+
+    if (storedAdmin) {
+      setAdmin(JSON.parse(storedAdmin));
     }
   }, []);
 
@@ -331,7 +337,7 @@ export default function BlogDetail() {
           <h2 className="text-xl font-semibold text-gray-900">
             Comments ({blog.comments.length})
           </h2>
-          {user ? (
+          {user || admin ? (
             <form className="mt-4" onSubmit={handleComment}>
               <textarea
                 value={commentText}
