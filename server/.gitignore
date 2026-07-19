@@ -4,8 +4,3 @@
 # Dependencies
 node_modules/
 
-# Scripts folder
-scripts/
-
-# Utils folder
-utils/
