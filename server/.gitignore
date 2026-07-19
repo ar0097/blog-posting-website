@@ -5,7 +5,7 @@
 node_modules/
 
 # Scripts folder
-script/
+scripts/
 
 # Utils folder
-util/
+utils/
