@@ -255,7 +255,7 @@ export default function AdminBlogList() {
             ))}
           </select>
           <span className="ml-2 text-gray-500">
-            Showing {"items.length"} of {"filtered.length"}
+            Showing {paginatedBlogs.length} of {filteredBlogs.length}
           </span>
         </div>
         {/* <Pagination page={0} pageCount={5} onChange={5} /> */}
