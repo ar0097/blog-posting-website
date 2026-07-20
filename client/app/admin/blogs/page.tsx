@@ -103,7 +103,7 @@ export default function page() {
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r border-[#e2e8f0] bg-[#fcf9fa] text-[#020618] md:flex">
         <div className="flex h-full flex-col p-4">
           <Link href="/" className="mb-8 text-lg font-bold text-[#020618]">
-            Inkwell
+            Blogger
             <span className="text-[#0f172b]">.</span>
             <span className="ml-1 text-xs font-normal text-[#62748e]">
               admin
@@ -132,7 +132,7 @@ export default function page() {
       <main className="min-w-0 flex-1">
         <div className="sticky top-0 z-30 flex items-center justify-between border-b border-[#e2e8f0] bg-white px-4 py-3 md:hidden">
           <Link href="/" className="text-lg font-bold text-[#020618]">
-            Inkwell
+            Blogger
             <span className="text-[#0f172b]">.</span>
           </Link>
 
@@ -155,7 +155,7 @@ export default function page() {
               <div className="flex h-full flex-col p-4">
                 <div className="mb-6 flex items-center justify-between">
                   <Link href="/" className="text-lg font-bold text-[#020618]">
-                    Inkwell
+                    Blogger
                     <span className="text-[#0f172b]">.</span>
                   </Link>
 

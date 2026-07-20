@@ -26,7 +26,7 @@ export default function PublicHeader() {
           href="/"
           className="text-xl font-bold tracking-tight text-gray-900"
         >
-          Inkwell<span className="text-indigo-600">.</span>
+          Blogger<span className="text-indigo-600">.</span>
         </Link>
         <nav className="flex items-center gap-4 text-sm">
           <Link href="/" className="text-gray-700 hover:text-indigo-600">

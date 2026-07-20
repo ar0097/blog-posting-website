@@ -108,7 +108,7 @@ export default function page() {
       </div>
 
       <footer className="mt-12 border-t border-gray-200 bg-white py-8 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} Inkwell. Built as a frontend assignment.
+        © {new Date().getFullYear()} Blogger. Built as a frontend assignment.
       </footer>
     </div>
   );

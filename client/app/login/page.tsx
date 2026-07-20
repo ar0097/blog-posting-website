@@ -14,10 +14,10 @@ export default function page() {
           href="/"
           className="mb-6 block text-center text-xl font-bold text-gray-900"
         >
-          Inkwell<span className="text-indigo-600">.</span>
+          Blogger<span className="text-indigo-600">.</span>
         </Link>
         <h1 className="text-center text-2xl font-semibold text-gray-900">
-          Sign in to Inkwell
+          Sign in to Blogger
         </h1>
         <p className="mt-1 text-center text-sm text-gray-500">
           Sign in with your Google account to like posts and comment.

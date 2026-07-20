@@ -10,7 +10,7 @@ const createAdmin = async () => {
         await connectDB();
 
         const existingAdmin = await Admin.findOne({
-            email: "admin@gmail.com",
+            email: "blogadmin@gmail.com",
         });
 
         if (existingAdmin) {
@@ -18,11 +18,11 @@ const createAdmin = async () => {
             process.exit();
         }
 
-        const hashedPassword = await bcrypt.hash("admin123", 10);
+        const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
 
         await Admin.create({
-            name: "Admin",
-            email: "admin@gmail.com",
+            name: "Blog Admin",
+            email: "blogadmin@gmail.com",
             password: hashedPassword,
         });
 
