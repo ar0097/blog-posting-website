@@ -92,8 +92,16 @@ const blogSchema = new mongoose.Schema(
         },
         likes: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User",
+                user: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    refPath: "likes.userModel",
+                    required: true,
+                },
+                userModel: {
+                    type: String,
+                    enum: ["User", "Admin"],
+                    required: true,
+                },
             },
         ],
 
@@ -101,14 +109,18 @@ const blogSchema = new mongoose.Schema(
             {
                 user: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: "User",
+                    refPath: "comments.userModel",
+                    required: true,
                 },
-
+                userModel: {
+                    type: String,
+                    enum: ["User", "Admin"],
+                    required: true,
+                },
                 comment: {
                     type: String,
                     required: true,
                 },
-
                 createdAt: {
                     type: Date,
                     default: Date.now,

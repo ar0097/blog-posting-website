@@ -14,6 +14,7 @@ const {
 } = require("../controllers/blogController");
 const verifyAdmin = require("../middleware/verifyAdmin");
 const verifyUser = require("../middleware/verifyUser");
+const verifyAuth = require("../middleware/verifyAuth");
 
 
 router.post("/", verifyAdmin, createBlog);
@@ -23,8 +24,8 @@ router.get("/", getAllBlogs);
 router.get("/:slug", getBlogBySlug);
 router.put("/:id", verifyAdmin, updateBlog);
 router.delete("/:id", verifyAdmin, deleteBlog);
-router.post("/:id/like", verifyUser, toggleLike);
-router.post("/:id/comment", verifyUser, addComment);
+router.post("/:id/like", verifyAuth, toggleLike);
+router.post("/:id/comment", verifyAuth, addComment);
 router.post("/:id/view", incrementView);
 
 module.exports = router;

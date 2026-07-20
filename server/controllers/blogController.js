@@ -250,16 +250,13 @@ const toggleLike = async (req, res) => {
             });
         }
 
-        const userId = req.user._id;
-
         const alreadyLiked = blog.likes.some(
-            (like) => like.toString() === userId.toString()
+            (like) => like.user.toString() === req.user._id.toString()
         );
 
         if (alreadyLiked) {
-            // Unlike
             blog.likes = blog.likes.filter(
-                (like) => like.toString() !== userId.toString()
+                (like) => like.user.toString() !== req.user._id.toString()
             );
 
             await blog.save();
@@ -272,8 +269,10 @@ const toggleLike = async (req, res) => {
             });
         }
 
-        // Like
-        blog.likes.push(userId);
+        blog.likes.push({
+            user: req.user._id,
+            userModel: req.role === "admin" ? "Admin" : "User",
+        });
 
         await blog.save();
 
@@ -283,6 +282,7 @@ const toggleLike = async (req, res) => {
             likes: blog.likes.length,
             liked: true,
         });
+
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -314,6 +314,7 @@ const addComment = async (req, res) => {
 
         blog.comments.push({
             user: req.user._id,
+            userModel: req.role === "admin" ? "Admin" : "User",
             comment,
         });
 

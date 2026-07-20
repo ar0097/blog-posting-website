@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const Admin = require("../models/Admin");
 const generateToken = require("../utils/generateToken");
 
-// POST /api/admin/login
 const adminLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -39,7 +38,7 @@ const adminLogin = async (req, res) => {
             message: "Login successful",
             token,
             admin: {
-                id: admin._id,
+                _id: admin._id,
                 name: admin.name,
                 email: admin.email,
                 role: admin.role,

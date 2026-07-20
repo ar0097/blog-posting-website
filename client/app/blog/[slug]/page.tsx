@@ -50,22 +50,17 @@ export default function BlogDetail() {
   }, []);
 
   useEffect(() => {
-    if (!blog || !user) return;
+    const account = user || admin;
 
-    const alreadyLiked = blog.likes.some(
-      (id: any) => id.toString() === user._id,
-    );
+    if (!blog || !account) return;
+
+    const alreadyLiked = blog.likes.some((like: any) => {
+      if (!like?.user) return false;
+      return like.user.toString() === account._id.toString();
+    });
 
     setLiked(alreadyLiked);
-  }, [blog, user]);
-
-  useEffect(() => {
-    console.log("mounted");
-
-    return () => {
-      console.log("unmounted");
-    };
-  }, []);
+  }, [blog, user, admin]);
 
   useEffect(() => {
     fetchBlogs();
@@ -84,6 +79,8 @@ export default function BlogDetail() {
     if (!slug) return;
 
     const data = await getBlogBySlug(slug as string);
+    console.log("BLOG =>", data.blog);
+    console.log("LIKES =>", data.blog.likes);
 
     setBlog(data.blog);
 
@@ -110,7 +107,9 @@ export default function BlogDetail() {
   }, [slug]);
 
   const handleLike = async () => {
-    if (!user) {
+    const account = user || admin;
+
+    if (!account) {
       router.push("/login");
       return;
     }
@@ -122,16 +121,7 @@ export default function BlogDetail() {
 
       setLiked(data.liked);
 
-      setBlog((prev) => {
-        if (!prev) return prev;
-
-        return {
-          ...prev,
-          likes: data.liked
-            ? [...prev.likes, user._id]
-            : prev.likes.filter((id: any) => id.toString() !== user._id),
-        };
-      });
+      await fetchBlog();
     } catch (error) {
       console.log(error);
     }

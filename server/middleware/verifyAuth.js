@@ -1,15 +1,17 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const Admin = require("../models/Admin");
 
-const verifyUser = async (req, res, next) => {
-    console.log("VERIFY USER");
+const verifyAuth = async (req, res, next) => {
+    console.log("VERIFY AUTH");
+
     try {
         const authHeader = req.headers.authorization;
 
         if (!authHeader || !authHeader.startsWith("Bearer ")) {
             return res.status(401).json({
                 success: false,
-                message: "Access denied. No token provided.",
+                message: "No token provided",
             });
         }
 
@@ -17,31 +19,31 @@ const verifyUser = async (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        if (decoded.role !== "user") {
-            return res.status(403).json({
-                success: false,
-                message: "Access denied.",
-            });
+        let account;
+
+        if (decoded.role === "user") {
+            account = await User.findById(decoded.id).select("-password");
+        } else if (decoded.role === "admin") {
+            account = await Admin.findById(decoded.id).select("-password");
         }
 
-        const user = await User.findById(decoded.id).select("-__v");
-
-        if (!user) {
+        if (!account) {
             return res.status(404).json({
                 success: false,
-                message: "User not found.",
+                message: "Account not found",
             });
         }
 
-        req.user = user;
+        req.user = account;
+        req.role = decoded.role;
 
         next();
     } catch (error) {
         return res.status(401).json({
             success: false,
-            message: "Invalid or expired token.",
+            message: "Invalid token",
         });
     }
 };
 
-module.exports = verifyUser;
+module.exports = verifyAuth;
