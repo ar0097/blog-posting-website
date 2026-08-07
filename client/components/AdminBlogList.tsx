@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { FaEdit, FaEye, FaPlus, FaTrash } from "react-icons/fa";
 import SearchBar from "../components/SearchBar";
-import Pagination from "../components/Pagination";
 import Link from "next/link";
 import { deleteBlog, getBlogs } from "@/api/blogApi";
 import { Blog } from "@/types/types";
@@ -258,7 +257,6 @@ export default function AdminBlogList() {
             Showing {paginatedBlogs.length} of {filteredBlogs.length}
           </span>
         </div>
-        {/* <Pagination page={0} pageCount={5} onChange={5} /> */}
       </div>
     </div>
   );
